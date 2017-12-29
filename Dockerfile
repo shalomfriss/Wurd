@@ -7,7 +7,7 @@ RUN npm install
 COPY . .
 
 # Expose the public http port
-EXPOSE 3000
+EXPOSE 8000
 
 # Start server
 CMD ["npm", "run", "dev"]
