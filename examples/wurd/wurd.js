@@ -59,7 +59,7 @@ export const Wurd = Game({
       if (cells[id] === null) {
         cells[id] = ctx.currentPlayer;
       }
-
+	  
       let winner = null;
       if (IsVictory(cells)) {
         winner = ctx.currentPlayer;

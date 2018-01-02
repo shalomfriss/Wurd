@@ -1,3 +1,5 @@
+//https://github.com/mzabriskie/react-draggable
+
 // Sizes
 export const tilesH = 15
 export const tilesV = 15
@@ -8,6 +10,8 @@ export const boardMargin = 20
 
 export const letterTileWidth = 50
 export const letterTileHeight = 50
+export const letterTileXCorrection = 10
+export const letterTileYCorrection = -15
 
 // Counts
 export const tripleWordScores = 8

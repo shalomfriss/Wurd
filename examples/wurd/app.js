@@ -13,6 +13,7 @@ import { Wurd } from './wurd';
 import { Board } from './board'
 import './app.css';
 import { createStore } from 'redux'
+import ReactDOM from 'react-dom';
 
 export const App = Client({
   game: Wurd,
@@ -20,8 +21,8 @@ export const App = Client({
   multiplayer: true,
 });
 
-render(<App/>, document.getElementById('app') ||
-               document.createElement('div'));
+//render(<App gameID="gameid"/>, document.getElementById('app') || document.createElement('div'));			   
+ReactDOM.render(<App gameID="gameid"/>, document.getElementById('app') || document.createElement('div'));
 
 if (module.hot) {
   module.hot.accept();

@@ -571,16 +571,29 @@ export class Board extends React.Component {
 	  
   }
   
+  onStart(aLetter) {
+	  console.log(aLetter)
+  	console.log(aLetter.target)
+  }
+  
+  onDrag(aLetter) {
+  	
+  }
+  
+  onStop(aLetter) {
+  	
+  }
+  
   createLetters() {
 	  var w1 = new Word()
+	  var root = this
 	  
 	  console.log("CREATE")
 	  console.log(this.state.words)
 	  var divs = []
 	  for(var i = 0; i < 10; i++)
 	  {
-	  	divs.push(<Letter letter='A' value='10' key={Utils.UUID()} dragStart={this.detachLetter}></Letter>)
-		  
+	  	divs.push(<Letter letter='A' value='10' key={Utils.UUID()} onDrag={this.onDrag} onStart={this.onStart} onStop={this.onStop}></Letter>)
 	  }
   	return divs
   }

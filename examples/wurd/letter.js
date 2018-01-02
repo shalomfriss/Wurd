@@ -1,7 +1,7 @@
 import React from 'react';
 import { Utils } from './js/utils/Utils'
 import interact from 'interactjs'
-import {tilesH, tilesV, tileW, tileH, tileSpace, boardMargin , THEME, boardTextFont} from './config';
+import {tilesH, tilesV, tileW, tileH, tileSpace, boardMargin , THEME, boardTextFont, letterTileXCorrection, letterTileYCorrection} from './config';
 import './css/style.css'
 import Draggable from 'react-draggable';
 import {letterTileWidth, letterTileHeight} from './config'
@@ -34,7 +34,9 @@ export class Letter extends React.Component {
 	this.wildcard = false
 	this.interactive = true
 	
-    
+	this.onStart = props.onStart
+    this.onDrag = props.onDrag
+	this.onStop = props.onStop
     //this.setHtml()
 	  
     this.originalPosition = null
@@ -74,7 +76,7 @@ export class Letter extends React.Component {
 	  
 	  */
   }
-
+/*
   setHtml() {
 	  $(this.div).html("")
 	  
@@ -97,7 +99,8 @@ export class Letter extends React.Component {
   initDrag () {
 
   }
-
+*/
+  
   setOriginalPosition (top, left) {
     this.originalPosition = {top: top, left: left}
   }
@@ -122,7 +125,7 @@ export class Letter extends React.Component {
 	}
     $(this.div[0]).offset({top: this.originalPosition.top, left: this.originalPosition.left})
   }
-
+	
   dragEnd (event) {
     //var data = $(event.target).data('ref')
 	  /*
@@ -138,7 +141,7 @@ export class Letter extends React.Component {
 
     //$(data.div).trigger(DETACH_FROM_BOARD_EVENT)
   }
-
+	
   dragMoveListener (event) {
 	    var target = event.target,
 	        // keep the dragged position in the data-x/data-y attributes
@@ -149,7 +152,7 @@ export class Letter extends React.Component {
 	    target.style.webkitTransform =
 	    target.style.transform =
 	      'translate(' + x + 'px, ' + y + 'px)'
-
+	  
 	    // update the posiion attributes
 	    target.setAttribute('data-x', x)
 	    target.setAttribute('data-y', y)
@@ -168,14 +171,22 @@ export class Letter extends React.Component {
           }
           
 		  return (
-			  <Draggable grid={[letterTileWidth, letterTileHeight]}>
+			  <Draggable grid={[letterTileWidth, letterTileHeight]} 
+			  defaultPosition={{x: letterTileXCorrection, y: letterTileYCorrection}} 
+			  onStart={this.onStart} 
+			  onDrag={this.onDrag}  
+			  onStop={this.onStop}>
 		  	<div className='letter'> <div className='letterText' >{this.letter.toUpperCase()}</div> <div className='letterValue'>{this.value}</div> <div className='letterBG'></div> </div>
 		  	</Draggable>
 		  );
         } 
 		else {
           return (
-			  <Draggable grid={letterTileWidth, letterTileHeight}>
+			  <Draggable grid={letterTileWidth, letterTileHeight} 
+			  defaultPosition={{x: letterTileXCorrection, y: letterTileYCorrection}} 
+			  onStart={this.onStart} 
+			  onDrag={this.onDrag}  
+			  onStop={this.onStop}>
           	<div className='letterNoninteractive'> <div className='letterText'>{this.letter.toUpperCase()}</div> <div className='letterValue'>{this.value}</div> <div className='letterBG'></div> </div>
          	 </Draggable>
 		  );
